@@ -1,0 +1,89 @@
+{% extends 'base.html' %} {% block title %} Prueba Detalles {% endblock %}
+{%block cardheader %}
+<i class="fas fa-table me-1"></i>
+Prueba Detalles {% endblock %} 
+
+{% block cardcontent %} 
+
+<div class="accordion" id="accordionExample">
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingOne">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+        Informacion Prueba
+      </button>
+    </h2>
+    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne">
+      <div class="accordion-body">
+        
+              <table  class="table table-hover table-striped table-condensed table-bordered">                        
+                  <tbody>
+                       <tr>
+                          <th>Fecha y Hora</th>
+                          <td>{{prueba.hora_inicio}}</td>
+                      </tr>
+                       <tr>
+                           <th>Programa Academico</th>
+                           <td>{{prueba.programa_academico}}</td>
+                       </tr>
+                       <tr>
+                           <th>Cantidad Estudiantes</th>
+                           <td>{{estudiantes.count}}</td>
+                       </tr>
+                  </tbody>
+              </table>
+              {% if user.is_director%}
+              <a href="{% url 'prueba_programada_actualizar' prueba.pk %}" class="btn btn-secondary btn-sm" type="button"> Editar Informacion </a>
+              <a href="{% url 'matricula_crear' prueba.pk %}" class="btn btn-primary btn-sm" type="button"> Agregar Estudiantes </a>
+              {% endif%}
+        </div>
+
+      </div>
+    </div>
+  </div>
+  {% if user.is_director %}
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingTwo">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+        Estudiantes Participantes
+      </button>
+    </h2>
+    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" >
+      <div class="accordion-body">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Nombre Completo</th>
+            <th>Codigo</th>
+            <th>Email</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for estudiante in estudiantes %}
+          <tr>
+            <td>{{estudiante.estudiante.user.first_name}} {{estudiante.estudiante.user.last_name}}</td>
+            <td>{{estudiante.estudiante.user.username}}</td>
+            <td>{{estudiante.estudiante.user.email}}</td>
+            <td>
+              <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <a href="" class="btn btn-danger btn-sm" type="button"> Remover </a>
+              </div>
+            </td>
+          </tr>
+          
+          {% endfor%}
+        </tbody>
+      </table>
+
+
+      </div>
+    </div>
+  </div>
+  {% endif%}
+</div>
+</div>
+
+{% endblock %} 
+
+{% block cardfooter %} 
+{% endblock %}

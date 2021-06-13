@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %} Modulos {% endblock %}
+{% block cardheader %}
+<i class="fas fa-table me-1"></i>
+Modulos
+{% endblock %}
+{% block cardcontent %}
+<div class="row">
+  {% for modulo in object_list %}
+  <div class="col-sm-3">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">{{modulo.nombre}}</h5>
+        <p class="card-text"></p>
+        <a  href="{% url 'modulo_detalles' modulo.pk %}" class="btn btn-primary">Ver Preguntas</a>
+      </div>
+    </div>
+  </div>
+  {% empty %}
+  <li>No articles yet.</li>
+  {% endfor %}
+</div>
+{% endblock %}
+{% block cardfooter %}
+{% endblock %}

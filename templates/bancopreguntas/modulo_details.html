@@ -1,0 +1,43 @@
+{% extends 'base.html' %} {% block title %} {{modulo.nombre}} {% endblock %} 
+{%block cardheader %}
+<i class="fas fa-table me-1"></i>
+{{modulo.nombre}} {% endblock %} {% block cardcontent %}
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Enunciado</th>
+      <th>Respuesta</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for pregunta in preguntas%}
+    <tr>
+      <td>{{ forloop.counter }}</td>
+      <td>{{pregunta.enunciado}}</td>
+      <td>{{pregunta.opcionRespuesta}}</td>
+      <td>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+          <a
+            href="{% url 'pregunta_editar' pregunta.pk %}"
+            class="btn btn-secondary me-md-2 btn-sm"
+            type="button"
+            >Editar</a
+          >
+          <a
+            href="{% url 'pregunta_eliminar' pregunta.pk %}"
+            class="btn btn-danger btn-sm"
+            type="button"
+            >Eliminar</a
+          >
+        </div>
+      </td>
+    </tr>
+
+    {% endfor%}
+  </tbody>
+</table>
+
+{% endblock %} {% block cardfooter %} {% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %} Agregar Estudiantes {% endblock %}
+
+{% block cardheader %}
+<i class="fas fa-table me-1"></i>
+Agregar Estudiantes
+{% endblock %}
+{% block cardcontent %}
+<form method="post">
+  {% csrf_token %}
+
+      {{ form.as_p }}
+      {% endblock %}
+      {% block cardfooter %}
+<button type="submit" class="btn btn-space btn-primary">Guardar</button>
+<a href="#" class="btn btn-success" type="button"> Cargar Archivo Excel</a>
+
+{% endblock %}
+</form>
+
+

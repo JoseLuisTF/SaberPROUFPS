@@ -1,0 +1,73 @@
+{% extends 'base.html' %} {% block title %} Prueba {% endblock %} 
+{% block cardheader %}
+<i class="fas fa-table me-1"></i>
+Prueba {% endblock %} 
+{% block cardcontent %} 
+{% for cuadernillo in cuadernillos%}
+
+<form method="post">
+    {% csrf_token %}
+    
+  <div class="card">
+    <div class="card-header">{{cuadernillo.pregunta.modulo}}</div>
+    <div class="card-body">
+      <b>{{ forloop.counter }}.{{cuadernillo.pregunta.enunciado}}</b>
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="radio"
+          value="{{cuadernillo.pregunta.opcion1}}"
+          name="{{cuadernillo.pregunta.pk}}"
+          id="flexRadioDefault1"
+        />
+        <label class="form-check-label" for="flexRadioDefault1">
+          A. {{cuadernillo.pregunta.opcion1}}
+        </label>
+      </div>
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="radio"
+          value="{{cuadernillo.pregunta.opcion2}}"
+          name="{{cuadernillo.pregunta.pk}}"
+          id="flexRadioDefault2"
+        />
+        <label class="form-check-label" for="flexRadioDefault2">
+          B. {{cuadernillo.pregunta.opcion2}}
+        </label>
+      </div>
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="radio"
+          value="{{cuadernillo.pregunta.opcion3}}"
+          name="{{cuadernillo.pregunta.pk}}"
+          id="flexRadioDefault3"
+        />
+        <label class="form-check-label" for="flexRadioDefault2">
+          C. {{cuadernillo.pregunta.opcion3}}
+        </label>
+      </div>
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="radio"
+          value="{{cuadernillo.pregunta.opcionRespuesta}}"
+          name="{{cuadernillo.pregunta.pk}}"
+          id="flexRadio4"
+        />
+        <label class="form-check-label" for="flexRadioDefault2">
+          D. {{cuadernillo.pregunta.opcionRespuesta}}
+        </label>
+      </div>
+    </div>
+  </div>
+
+  {% endfor %}
+ 
+
+    {% endblock %} 
+    {% block cardfooter %} 
+    <button type="submit" class="btn btn-space btn-primary">Guardar</button>
+</form>
+{% endblock %}

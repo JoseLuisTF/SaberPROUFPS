@@ -1,0 +1,28 @@
+{% extends 'base.html' %} {% block title %}Pruebas Programadas {% endblock %} 
+{%block cardheader %}
+<i class="fas fa-table me-1"></i>
+Pruebas Programadas <b>{{user.estudiante.programa_academico}}</b>{% endblock %}
+ {% block cardcontent %}
+<div class="row">
+  {% for prueba in pruebas %}
+  <div class="col-sm-3">
+    <div class="card">
+      <div class="card-body">
+        <h6 class="card-title">Fecha y Hora: {{prueba.hora_inicio}}</h6>
+        <p class="card-text"></p>
+        <h6 class="card-title">
+          Programa Academico: {{prueba.programa_academico}}
+        </h6>
+        <a
+          href="{% url 'prueba_programada_detalles' prueba.pk %}"
+          class="btn btn-primary"
+          >Ver Detalles</a
+        >
+      </div>
+    </div>
+  </div>
+  {% empty %}
+  <li>No articles yet.</li>
+  {% endfor %}
+</div>
+{% endblock %} {% block cardfooter %} {% endblock %}

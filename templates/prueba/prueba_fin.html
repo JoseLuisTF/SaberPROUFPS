@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %} ####### {% endblock %}
+
+{% block cardheader %}
+Prueba Finalizada
+{% endblock %}
+
+
+
+{% block cardcontent %}
+<div class="alert alert-success" role="alert">
+    Haz finalizado tu prueba y tus respuestas han sido guardadas satisfactoriamente.
+    Para ver tu resultado revisa <a href="{% url 'pruebas_realizadas_estudiante' user.pk %}">Tus pruebas realizadas!</a>
+  </div>
+{% endblock %}
+
+
+
+{% block cardfooter %}
+
+{% endblock %}

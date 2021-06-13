@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title %} ####### {% endblock %}
+
+{% block cardheader %}
+Pruebas Programadas
+{% endblock %}
+
+
+
+{% block cardcontent %}
+
+
+<div class="row">
+    {% for matricula in matricula_list %}
+    <div class="col-sm-3">
+      <div class="card ">
+        <div class="card-body">
+          <h6 class="card-title">Fecha y Hora: {{matricula.prueba.hora_inicio}}</h6>
+          <p class="card-text"></p>
+          <h6 class="card-title">
+            Programa Academico: {{matricula.prueba.programa_academico}}
+          </h6>
+          <a
+            href="{% url 'prueba_programada_detalles' matricula.pk %}"
+            class="btn btn-primary"
+            >Ver detalles</a
+          >
+        </div>
+      </div>
+    </div>
+    {% empty %}
+    <div class="alert alert-warning" role="alert">
+      No tienes Pruebas Programadas en este momento.
+    </div>
+    {% endfor %}
+  </div>
+  
+  {% endblock %}
+
+
+
+{% block cardfooter %}
+
+{% endblock %}

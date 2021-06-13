@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %} ####### {% endblock %}
+
+{% block cardheader %}
+
+{% endblock %}
+
+
+
+{% block cardcontent %}
+
+<form method="post">
+	{% csrf_token %}
+    <h3>¿Desea eliminar la pregunta {{pregunta.enunciado}}?</h3>
+	<button class="btn btn-danger" type="submit">Sí, eliminar</button>
+	<a class= "btn btn-dark" href="{% url 'modulo_detalles' pregunta.modulo.pk %}">Cancelar</a>
+</form>
+
+{% endblock %}
+
+
+
+{% block cardfooter %}
+
+{% endblock %}
