@@ -16,6 +16,10 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = True
+
+ALLOWED_HOSTS = ['saberproufps.herokuapp.com']
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
@@ -70,7 +74,16 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'saberproufps.wsgi.application'
 
-
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "NAME": "d4m72co4s51vvj",
+        "USER": "ioxmuxwysckuin",
+        "PASSWORD": "78e36a7cba8d0ebf593b3487cfff0612271b321aff3091de292192acc5b23955",
+        "HOST": "ec2-23-23-128-222.compute-1.amazonaws.com",
+        "PORT": "5432",
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -130,23 +143,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'login'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
-ALLOWED_HOSTS = ['saberproufps.herokuapp.com']
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": "d4m72co4s51vvj",
-        "USER": "ioxmuxwysckuin",
-        "PASSWORD": "78e36a7cba8d0ebf593b3487cfff0612271b321aff3091de292192acc5b23955",
-        "HOST": "ec2-23-23-128-222.compute-1.amazonaws.com",
-        "PORT": "5432",
-    }
-}
+
 
 STATICFILES_DIRS = (os.path.join(BASE_DIR, '../static'),)
