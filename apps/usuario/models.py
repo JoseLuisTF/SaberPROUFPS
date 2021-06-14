@@ -13,6 +13,7 @@ class User(AbstractUser):
     is_estudiante = models.BooleanField(default=False)
     is_director = models.BooleanField(default=False)
     is_editor = models.BooleanField(default=False)
+    usuario = models.CharField(max_length=20)
 
 
 class Estudiante(models.Model):
