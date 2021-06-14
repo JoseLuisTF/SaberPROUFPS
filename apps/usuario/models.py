@@ -22,6 +22,8 @@ class Estudiante(models.Model):
     def __str__(self):
         return '{} {} - {}'.format(self.user.first_name,self.user.last_name, self.user.username)
 
+class Usuario(models.Model):
+    user = models.OneToOneField(User,on_delete=CASCADE,primary_key=True)
 
 class Administrativo(models.Model):
     user = models.OneToOneField(User,on_delete=CASCADE,primary_key=True)
