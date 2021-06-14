@@ -1,17 +1,18 @@
 from django.views.generic.base import TemplateView
 from django.shortcuts import redirect, render, get_object_or_404
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, ListView, DetailView, UpdateView
 from django.urls import reverse_lazy
 from datetime import datetime
 
 from apps.prueba.models import Prueba, Matricula, Respuesta, Cuadernillo, Nota
 from apps.prueba.forms import PruebaForm, MatriculaForm, ResolverPruebaForm
-
 from apps.bancopreguntas.models import Modulo, Pregunta
 
 # Create your views here.
 
-
+@method_decorator([login_required], name='dispatch')
 class PruebaCreate(CreateView):
     model = Prueba
     form_class = PruebaForm
@@ -29,7 +30,7 @@ class PruebaCreate(CreateView):
                 Cuadernillo.objects.create(prueba=pruebita, pregunta=pregunta)
         return super().form_valid(form)
 
-
+@method_decorator([login_required], name='dispatch')
 class PruebaProgramadaList(ListView):
     model = Prueba
     template_name = 'prueba/prueba_list.html'
@@ -40,7 +41,7 @@ class PruebaProgramadaList(ListView):
             realizada=False).order_by('hora_inicio')
         return context
 
-
+@method_decorator([login_required], name='dispatch')
 class PruebaProgramadaDetail(DetailView):
     model = Prueba
     template_name = 'prueba/prueba_details.html'
@@ -50,7 +51,7 @@ class PruebaProgramadaDetail(DetailView):
         context['estudiantes'] = Matricula.objects.filter(prueba=self.kwargs.get('pk'))
         return context
 
-
+@method_decorator([login_required], name='dispatch')
 class PruebaUpdate(UpdateView):
     model = Prueba
     form_class = PruebaForm
@@ -61,7 +62,7 @@ class PruebaUpdate(UpdateView):
 
         return reverse_lazy("prueba_programada_detalles", kwargs={'pk': self.object.pk})
 
-
+@method_decorator([login_required], name='dispatch')
 class MatriculaCreate(CreateView):
     model = Matricula
     form_class = MatriculaForm
@@ -76,14 +77,14 @@ class MatriculaCreate(CreateView):
     def get_success_url(self, **kwargs):
         return reverse_lazy('prueba_programada_detalles', kwargs={'pk': self.object.prueba.pk})
 
-
+@method_decorator([login_required], name='dispatch')
 class RespuestaCreate(CreateView):
     model = Respuesta
     form_class = ResolverPruebaForm
     template_name = 'prueba/respuesta_form.html'
     success_url = reverse_lazy('home')
 
-
+@login_required
 def resolverPrueba(request, pk):    
 
     matricula = get_object_or_404(Matricula, pk=pk)
@@ -112,7 +113,7 @@ def resolverPrueba(request, pk):
     return render(request, 'prueba/presentar_prueba.html',{'cuadernillos':cuadernillos})
 
 
-
+@method_decorator([login_required], name='dispatch')
 class PruebasActivasEstudiante(ListView):
     model = Matricula
     template_name = 'prueba/activas_estudiante.html'
@@ -121,7 +122,7 @@ class PruebasActivasEstudiante(ListView):
         qs = super().get_queryset()
         return qs.filter(estudiante = self.kwargs['pk'], activa=True)
 
-
+@method_decorator([login_required], name='dispatch')
 class PruebasProgramadasEstudiante(ListView):
     model = Matricula
     template_name = 'prueba/programadas_estudiante.html'
@@ -130,7 +131,7 @@ class PruebasProgramadasEstudiante(ListView):
         qs = super().get_queryset()
         return qs.filter(estudiante = self.kwargs['pk'], activa=False, prueba__realizada=False)
 
-
+@method_decorator([login_required], name='dispatch')
 class PruebasRealizadasEstudiante(ListView):
     model = Matricula
     template_name = 'prueba/realizadas_estudiante.html'
@@ -139,7 +140,7 @@ class PruebasRealizadasEstudiante(ListView):
         qs = super().get_queryset()
         return qs.filter(estudiante = self.kwargs['pk'], activa=False, prueba__realizada=True)
 
-
+@method_decorator([login_required], name='dispatch')
 class NotaDetail(TemplateView):
     model = Nota
     template_name = 'prueba/nota_detalles.html'
@@ -151,11 +152,11 @@ class NotaDetail(TemplateView):
         context ['respuestas'] = Respuesta.objects.filter(matricula=self.kwargs['pk'])
         return context 
 
-
+@method_decorator([login_required], name='dispatch')
 class PruebaFin(TemplateView):
     template_name = 'prueba/prueba_fin.html'
 
-
+@method_decorator([login_required], name='dispatch')
 class PruebasCalificadas(TemplateView):
     template_name = 'prueba/pruebas_calificadas.html'
 
@@ -165,7 +166,7 @@ class PruebasCalificadas(TemplateView):
         print(context)
         return context
 
-
+@method_decorator([login_required], name='dispatch')
 class NotaList(ListView):
     model = Nota
     template_name = 'prueba/nota_listado.html'
