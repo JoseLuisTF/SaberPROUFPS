@@ -1,7 +1,7 @@
 from apps.prueba import models
 from django.contrib.auth import login
 from django.shortcuts import redirect
-from django.views.generic import CreateView, ListView, DeleteView, DetailView, UpdateView
+from django.views.generic import CreateView, DetailView
 
 from apps.usuario.models import User
 from apps.usuario.forms import EstudianteSignUpForm

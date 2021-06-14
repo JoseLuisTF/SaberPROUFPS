@@ -1,8 +1,6 @@
 from django.views.generic.base import TemplateView
-from apps.prueba import models
-from apps.usuario.models import Estudiante
 from django.shortcuts import redirect, render, get_object_or_404
-from django.views.generic import CreateView, ListView, DeleteView, DetailView, UpdateView
+from django.views.generic import CreateView, ListView, DetailView, UpdateView
 from django.urls import reverse_lazy
 from datetime import datetime
 

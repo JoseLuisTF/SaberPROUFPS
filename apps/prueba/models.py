@@ -1,7 +1,5 @@
 from django.db import models
 from django.db.models.deletion import CASCADE
-from datetime import datetime
-
 
 from apps.usuario.models import ProgramaAcademico, Estudiante
 from apps.bancopreguntas.models import Pregunta
