@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %} ####### {% endblock %}
+{% block title %} SaberPRO UFPS {% endblock %}
 
 {% block cardheader %}
 Pruebas Programadas
@@ -21,7 +21,7 @@ Pruebas Programadas
             Programa Academico: {{matricula.prueba.programa_academico}}
           </h6>
           <a
-            href="{% url 'prueba_programada_detalles' matricula.pk %}"
+            href="{% url 'prueba_programada_detalles' matricula.prueba.pk %}"
             class="btn btn-primary"
             >Ver detalles</a
           >
